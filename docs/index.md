@@ -32,7 +32,9 @@ Grading is S/U.
 
 ### Resources
 
-Python is ubiquitous and there are many available resources.  Here is a taste of just a few.
+Python is ubiquitous and there are many available resources. There are many resources
+on the [Python Beginners Page](https://wiki.python.org/moin/BeginnersGuide/.) Here are 
+some other options.
 
 1. *Learning Python*, by Mark Lutz.  Published by O'Reilly. [Available free  through the O'Reilly online library via the UConn library.](https://learning.oreilly.com/library/view/learning-python-5th/9781449355722/) This is a 1600 page comprehensive overview of the Python language. 
 
