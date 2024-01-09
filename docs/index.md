@@ -36,6 +36,9 @@ Python is ubiquitous and there are many available resources. There are many reso
 on the [Python Beginners Page](https://wiki.python.org/moin/BeginnersGuide/.) Here are 
 some other options.
 
+1.  *Python Crash Course*, by Eric Matthes.  This is a well-reviewed book that is a reasonably efficient intro to Python.  It is available free through the 
+[O'Reilly online library via the UConn Library](https://learning.oreilly.com/library/view/python-crash-course/9781098156664/).
+
 1. *Learning Python*, by Mark Lutz.  Published by O'Reilly. [Available free  through the O'Reilly online library via the UConn library.](https://learning.oreilly.com/library/view/learning-python-5th/9781449355722/) This is a 1600 page comprehensive overview of the Python language. 
 
 2. *The Python Tutorial*, from [python.org](https://docs.python.org/3/tutorial/index.html) If you know some programming in another language you can quickly get a lot from this. 
@@ -58,7 +61,6 @@ algebra.  So you need access to these library files.  The key elements are:
 
 1. [The Anaconda Distribution](https://www.anaconda.com)  This includes python, the most commonly used libraries, and a tool (a 'package manager') that allows you to download other
 libraries that you may want for particular purposes.  This also includes `jupyter` which is a commonly used environment for working with Python. *Note that most computers are shipped today with some version of python installed, but you should install Anaconda rather than relying on the preinstalled version of python.*
-
 
 2. [vscode](https://code.visualstudio.com) This is an "IDE" (integrated development environment). It's like the ultimate text editor. It provides a huge collection of tools for writing code
 and is useful for writing LaTeX and pretty much anything else.
