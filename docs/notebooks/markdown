@@ -1,0 +1,436 @@
+<section id="jupyter-lab-project-walkthrough" class="cell markdown" data-tags="[]">
+<h1>Jupyter Lab Project Walkthrough</h1>
+<ol>
+<li>Use the 'text editor' feature in Jupyter Lab to create your README.md file.</li>
+<li><strong>RENAME YOUR NOTEBOOK FILE IMMEDIATELY</strong> to something relevant</li>
+<li>CTRL-ENTER executes a cell.</li>
+</ol>
+</section>
+<section id="markdown-cells" class="cell markdown">
+<h2>Markdown cells</h2>
+<p>This is a markdown cell:</p>
+<ul>
+<li>Headings are #, ##, etc.</li>
+<li>Bold is marked **make me bold** like <strong>this</strong>.</li>
+<li>Italics are marked *make me italic* like <em>this</em>.</li>
+<li>Math can be typeset with \LaTeX if you know it: <span class="math display"><em>f</em>(<em>x</em>) = <em>e</em><sup> − <em>x</em></sup>cos (<em>x</em>)</span></li>
+<li>Bulleted lists are marked with -.</li>
+</ul>
+</section>
+<div class="cell code" data-execution_count="3" data-tags="[]">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># code cells</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Code cells contain python code that gets executed.  </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># indicates a comment that is ignored.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello World!&quot;</span>)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Hello World!
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>In this walkthrough we will look at the following elements of Python in a jupyter notebook.</p>
+<p>The print statement</p>
+</div>
+<div class="cell code" data-execution_count="1">
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;hello world!&quot;</span>)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>hello world!
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Variables, variable names, and assignment/datatypes</p>
+</div>
+<div class="cell code" data-execution_count="2">
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">5</span> <span class="co"># an integer</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">&quot;Jeremy Teitelbaum&quot;</span> <span class="co"># a string</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>paragraph <span class="op">=</span> <span class="st">&quot;&quot;&quot;This is how you enter a multiline string</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">in python. It is enclosed in triple quotes.&quot;&quot;&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>pi <span class="op">=</span> <span class="fl">3.14159</span> <span class="co"># a float</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">1.0e-6</span> <span class="co"># a float</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>students <span class="op">=</span> [<span class="st">&quot;Jeremy&quot;</span>, <span class="st">&quot;Phillip&quot;</span>, <span class="st">&quot;Sara&quot;</span>, <span class="st">&quot;Molly&quot;</span>] <span class="co"># a list</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>HotDog <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="3">
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(students)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>[&#39;Jeremy&#39;, &#39;Phillip&#39;, &#39;Sara&#39;, &#39;Molly&#39;]
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Compare <code>print</code> for multiline strings with the string value. (\n means newline)</p>
+</div>
+<div class="cell code" data-execution_count="4">
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(paragraph)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>This is how you enter a multiline string
+in python. It is enclosed in triple quotes.
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="5">
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>paragraph</span></code></pre></div>
+<div class="output execute_result" data-execution_count="5">
+<pre><code>&#39;This is how you enter a multiline string\nin python. It is enclosed in triple quotes.&#39;</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Arithmetic operations</p>
+</div>
+<div class="cell code" data-execution_count="5">
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> count <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>5
+6
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="7">
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">/</span>pi</span></code></pre></div>
+<div class="output execute_result" data-execution_count="7">
+<pre><code>0.31831015504887655</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="12">
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span><span class="op">**</span><span class="dv">3</span>) <span class="co"># exponent</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="co"># division (converts integer to float)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)) <span class="co"># 2 becomes 2.0</span></span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>8
+0.5
+2.0
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="15">
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>quotient <span class="op">=</span> <span class="dv">5</span><span class="op">//</span><span class="dv">3</span> <span class="co"># integer division</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>remainder <span class="op">=</span> <span class="dv">5</span> <span class="op">%</span> <span class="dv">3</span> <span class="co"># remainder</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(quotient, remainder)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>1 2
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Operations on strings and lists</p>
+</div>
+<div class="cell code" data-execution_count="17">
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;Jeremy&quot;</span> <span class="op">+</span> <span class="st">&quot; Teitelbaum&quot;</span></span></code></pre></div>
+<div class="output execute_result" data-execution_count="17">
+<pre><code>&#39;Jeremy Teitelbaum&#39;</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="18">
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>[<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>]<span class="op">+</span>[<span class="st">&quot;d&quot;</span>]</span></code></pre></div>
+<div class="output execute_result" data-execution_count="18">
+<pre><code>[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="19">
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(<span class="st">&quot;Jeremy&quot;</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="19">
+<pre><code>6</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="20">
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>([<span class="st">&quot;Jeremy&quot;</span>,<span class="st">&quot;Teitelbaum&quot;</span>])</span></code></pre></div>
+<div class="output execute_result" data-execution_count="20">
+<pre><code>2</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="26">
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>firstName <span class="op">=</span> <span class="st">&quot;Jeremy&quot;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>lastName <span class="op">=</span> <span class="st">&quot;Teitelbaum&quot;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>fullName <span class="op">=</span> firstName <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> lastName</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Jeremy
+Teitelbaum
+Jeremy Teitelbaum
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Some fancier printing</p>
+</div>
+<div class="cell code" data-execution_count="31">
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;The first name is </span><span class="sc">{</span>firstName<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;The last name is </span><span class="sc">{</span>lastName<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;The full name is </span><span class="sc">{</span>firstName<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>lastName<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName, lastName, sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName, lastName, sep<span class="op">=</span><span class="st">&#39;:&#39;</span>)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>The first name is Jeremy
+The last name is Teitelbaum
+The full name is Jeremy Teitelbaum
+Jeremy,Teitelbaum
+Jeremy:Teitelbaum
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Slicing</p>
+<p>In python, we <strong>always count from zero</strong>!!!</p>
+</div>
+<div class="cell code" data-execution_count="37">
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>firstName[<span class="dv">0</span>]</span></code></pre></div>
+<div class="output execute_result" data-execution_count="37">
+<pre><code>&#39;J&#39;</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="38">
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lastName[<span class="dv">1</span>]</span></code></pre></div>
+<div class="output execute_result" data-execution_count="38">
+<pre><code>&#39;e&#39;</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="40">
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [a:b] means from a to b-1 inclusive</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[<span class="dv">0</span>:<span class="dv">3</span>])</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[<span class="dv">3</span>:])</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[<span class="dv">3</span>:<span class="dv">5</span>])</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Jer
+emy
+em
+y
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="42">
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># negative indices count from the end</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[<span class="op">-</span><span class="dv">1</span>]) <span class="co"># the last element</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[<span class="op">-</span><span class="dv">3</span>:<span class="op">-</span><span class="dv">1</span>]) <span class="co"># elements -3 and -2, but not -1</span></span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>y
+em
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="48">
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [a:b:c] means from a to b-1 in steps of c</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># missing numbers mean (beginnging):(end)</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[:<span class="dv">5</span>:<span class="dv">2</span>])</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[::<span class="dv">2</span>])</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[::<span class="op">-</span><span class="dv">1</span>]) <span class="co"># reverse the string</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[<span class="dv">3</span>::<span class="op">-</span><span class="dv">1</span>]) <span class="co"># 3,2,1,0</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firstName[<span class="dv">3</span>:<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]) <span class="co"># 3,2,1</span></span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Jrm
+Jrm
+ymereJ
+ereJ
+ere
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Slices work the same on list elements</p>
+</div>
+<div class="cell code" data-execution_count="52">
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(students[<span class="dv">0</span>])</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(students[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>every_other_student <span class="op">=</span> students[::<span class="dv">2</span>]</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(every_other_student)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Jeremy
+Molly
+[&#39;Jeremy&#39;, &#39;Sara&#39;]
+[&#39;Jeremy&#39;, &#39;Sara&#39;]
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Libraries</p>
+</div>
+<div class="cell code" data-execution_count="53">
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="54">
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>math.log(<span class="dv">23</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="54">
+<pre><code>3.1354942159291497</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="55">
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>math.pi</span></code></pre></div>
+<div class="output execute_result" data-execution_count="55">
+<pre><code>3.141592653589793</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="62">
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>math.cos(math.pi<span class="op">/</span><span class="dv">2</span>) <span class="co"># should be zero</span></span></code></pre></div>
+<div class="output execute_result" data-execution_count="62">
+<pre><code>6.123233995736766e-17</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="63">
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>math.cos(math.pi<span class="op">/</span><span class="dv">2</span>)<span class="op">==</span><span class="dv">0</span></span></code></pre></div>
+<div class="output execute_result" data-execution_count="63">
+<pre><code>False</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="64">
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">abs</span>(math.cos(math.pi<span class="op">/</span><span class="dv">2</span>))<span class="op">&lt;</span><span class="fl">1e-6</span></span></code></pre></div>
+<div class="output execute_result" data-execution_count="64">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="65">
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>math.pi <span class="op">==</span> pi</span></code></pre></div>
+<div class="output execute_result" data-execution_count="65">
+<pre><code>False</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="66">
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="68">
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>np.pia</span></code></pre></div>
+<div class="output execute_result" data-execution_count="68">
+<pre><code>3.141592653589793</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="74">
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.random.randint(<span class="dv">0</span>,<span class="dv">10</span>))</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>4
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="69">
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.__version__)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>1.24.2
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="72">
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> randint</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="73">
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>randint(<span class="dv">1</span>,<span class="dv">10</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="73">
+<pre><code>7</code></pre>
+</div>
+</div>
+<section id="numpy-arrays" class="cell markdown">
+<h2>Numpy arrays</h2>
+<p>A numpy array is like a list, but:</p>
+<pre><code>- it&#39;s itended for use with numbers
+- it&#39;s designed for fast arithmetic and numerical operations
+- it can be multi-dimensional -- like a table or matrix -- although we won&#39;t use that here.</code></pre>
+</section>
+<div class="cell markdown">
+
+</div>
+<div class="cell code" data-execution_count="2">
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>])</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>[1 2 3 4 5 6]
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>You access arrays like lists, and can use slices; indices start at zero.</p>
+</div>
+<div class="cell code" data-execution_count="3">
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>:<span class="dv">4</span>]</span></code></pre></div>
+<div class="output execute_result" data-execution_count="3">
+<pre><code>array([3, 4])</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>When you apply an operation to an array, it gets applied to every element of the array.</p>
+</div>
+<div class="cell code" data-execution_count="9">
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Square of x is </span><span class="sc">{x</span><span class="op">**</span><span class="dv">2</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;1/x is </span><span class="sc">{</span><span class="dv">1</span><span class="op">/</span><span class="sc">x}</span><span class="ss">&quot;</span>)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;cos(x) is </span><span class="sc">{np.</span>cos(x)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Square of x is [ 1  4  9 16 25 36]
+1/x is [1.         0.5        0.33333333 0.25       0.2        0.16666667]
+cos(x) is [ 0.54030231 -0.41614684 -0.9899925  -0.65364362  0.28366219  0.96017029]
+</code></pre>
+</div>
+</div>
+<div class="cell markdown">
+<p>Some special arrays.</p>
+</div>
+<div class="cell code" data-execution_count="31">
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.zeros(<span class="dv">10</span>) <span class="co"># 10 zeros</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>np.ones(<span class="dv">20</span>) <span class="co"># 20 ones</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">100</span>) <span class="co"># 100 equally spaced numbers from 0 to 10 **inclusive**</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">2</span>)))</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="32">
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>[-10  -8  -6  -4  -2   0   2   4   6   8]
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="4">
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(z)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>[ 0.          0.1010101   0.2020202   0.3030303   0.4040404   0.50505051
+  0.60606061  0.70707071  0.80808081  0.90909091  1.01010101  1.11111111
+  1.21212121  1.31313131  1.41414141  1.51515152  1.61616162  1.71717172
+  1.81818182  1.91919192  2.02020202  2.12121212  2.22222222  2.32323232
+  2.42424242  2.52525253  2.62626263  2.72727273  2.82828283  2.92929293
+  3.03030303  3.13131313  3.23232323  3.33333333  3.43434343  3.53535354
+  3.63636364  3.73737374  3.83838384  3.93939394  4.04040404  4.14141414
+  4.24242424  4.34343434  4.44444444  4.54545455  4.64646465  4.74747475
+  4.84848485  4.94949495  5.05050505  5.15151515  5.25252525  5.35353535
+  5.45454545  5.55555556  5.65656566  5.75757576  5.85858586  5.95959596
+  6.06060606  6.16161616  6.26262626  6.36363636  6.46464646  6.56565657
+  6.66666667  6.76767677  6.86868687  6.96969697  7.07070707  7.17171717
+  7.27272727  7.37373737  7.47474747  7.57575758  7.67676768  7.77777778
+  7.87878788  7.97979798  8.08080808  8.18181818  8.28282828  8.38383838
+  8.48484848  8.58585859  8.68686869  8.78787879  8.88888889  8.98989899
+  9.09090909  9.19191919  9.29292929  9.39393939  9.49494949  9.5959596
+  9.6969697   9.7979798   9.8989899  10.        ]
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="5">
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Plotting with matplotlib</span></span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="6">
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="8">
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>plt.plot(z,z<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="8">
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x7f1f4721acd0&gt;]</code></pre>
+</div>
+<div class="output display_data">
+<p><img src="5cad156fd8818fa02920eb7166789fb508ec9400.png" /></p>
+</div>
+</div>
+<div class="cell code" data-execution_count="34">
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>np.linspace(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">100</span>)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>plt.axes()</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>plt.plot(z,np.cos(z),color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;A cosine curve&quot;</span>)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>,<span class="dv">11</span>)))</span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;x&quot;</span>)</span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;y&quot;</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="34">
+<pre><code>Text(0, 0.5, &#39;y&#39;)</code></pre>
+</div>
+<div class="output display_data">
+<p><img src="48643579e806d4a222df631f253a7521583acfa9.png" /></p>
+</div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
