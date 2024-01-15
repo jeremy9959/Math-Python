@@ -32,16 +32,15 @@ language features.  It also teaches a lot about the language internals.
 it includes a quick intro to the language generally and
 then a detailed discussion of tools for data manipulation and visualization.
 
-In addition, [this page](links.md) includes links to other documents I have created for other courses on a variety of topics.
-
 
 ## Python documents from other Teitelbaum courses
 
 Some walkthroughs from my Grad 5100 (Fundamentals of Data Science) course.
 
-1. [Jupyter walkthrough](notebooks/JupyterWalkthrough.md) - [ipynb download](notebooks/JupyterWalkthrough.ipynb)
-2. [Python programming walkthrough](notebooks/python_programming.md) - [ipynb download](notebooks/python_programming.ipynb)
-3. [Files in Python](notebooks/pythonFiles.md) - [ipynb download](notebooks/pythonFiles.ipynb)
-4. [Regular Expressions](notebooks/regexpsPython.md) - [ipynb download](notebooks/regexpsPython.ipynb)
-5. [Plotting](notebooks/Plotting.md) -  [ipynb download](notebooks/Plotting.ipynb)
+1. [Jupyter walkthrough](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/02-JupyterBasics/jupyter-walkthrough.html) - [ipynb download](notebooks/JupyterWalkthrough.ipynb)
+2. [Python programming walkthrough](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/05-WorkingWithData/python_programming.html) - [ipynb download](notebooks/python_programming.ipynb)
+3. [Working with Data](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/05-WorkingWithData/pandas_penguins.html) - [ipynb download](notebooks/pandas_penguins.ipynb)
+4. [Files in Python](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/09-Regexps/pythonFiles.html) - [ipynb download](notebooks/pythonFiles.ipynb)
+5. [Regular Expressions](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/09-Regexps/regexpsPython.html) - [ipynb download](notebooks/regexpsPython.ipynb)
+6. [Plotting](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/13-Plotting/Plotting.html) -  [ipynb download](notebooks/Plotting.ipynb)
 
