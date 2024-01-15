@@ -24,8 +24,7 @@ This is a 1600 page comprehensive overview of the Python language.
 You have to pay for it.  It's always on sale and costs between 5 dollars and 20 dollars.  DO NOT pay more. 
 If you want a systematic, clearly taught,online course with a thorough coverage of python this is a good choice.
 
-4. [Fluent Python](https://learning.oreilly.com/library/view/fluent-python-2nd/9781492056348/) by Ramalho.  
-Also available free from O'Reilly through the UConn library. If you *know* python, this is a beautiful book about how to take full advantage of the
+4. [Fluent Python](https://learning.oreilly.com/library/view/fluent-python-2nd/9781492056348/) by Ramalho.  Also available free from O'Reilly through the UConn library. If you *know* python, this is a beautiful book about how to take full advantage of the
 language features.  It also teaches a lot about the language internals. 
 
 5. [Python for Data Analysis (3E)](https://wesmckinney.com/book/).  This is a book that focuses on using Python for data analysis, 
@@ -52,7 +51,8 @@ Some walkthroughs from my Grad 5100 (Fundamentals of Data Science) course.
 The page [Math-3094-UConn](https://jeremy9959.net/Math-3094-UConn/topics.html) includes material on classic machine learrning algorithms in python. 
 
 [This page](https://jeremy9959.net/Math-3094-UConn/LabResources.html)  has some introductory materials.  
-In addition here are links to labs (notebook files) on 
+
+Here are links to labs (notebook files and data) on 
 
 - [Linear Regression](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/RegressionLab.zip)
 - [Gradient Descent](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/gradient_descent.zip)
