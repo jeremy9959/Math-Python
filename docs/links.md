@@ -49,7 +49,7 @@ Some walkthroughs from my Grad 5100 (Fundamentals of Data Science) course.
 
 #### Math for Machine Learning
 
-The page [Math-3094-UConn](jeremy9959.net/Math-3094-UConn/topics.html) includes material on classic machine learrning algorithms in python. 
+The page [Math-3094-UConn](https://jeremy9959.net/Math-3094-UConn/topics.html) includes material on classic machine learrning algorithms in python. 
 
 [This page](https://jeremy9959.net/Math-3094-UConn/LabResources.html)  has some introductory materials.  
 In addition here are links to labs (notebook files) on 
