@@ -1,8 +1,7 @@
 ---
 title: Python regexps
-author: Jeremy Teitelbaum
-subtitle: Fundamentals of Data Science
-format: html
+layout: default
+nav_exclude: true
 ---
 
 ```
@@ -12,7 +11,7 @@ import pandas as pd
 ```
 
 
-```
+```python
 text = """
 Long ago, I travelled to the far west, seeking my fortune. I found
 frosty mountains, arid deserts, lush oases, and a huge ocean.
@@ -23,7 +22,7 @@ At times, I was gripped by despair, and at other times filled with Joy.
 ```
 
 
-```
+```python
 with open("data/filenames.txt") as f:
     filenames = f.readlines()
 print(filenames[0])
@@ -70,7 +69,7 @@ print(filenames[0])
 ## Looking for explicit strings
 
 
-```
+```python
 if re.search(r"travel", text):
     print("Yes")
 else:
@@ -86,52 +85,52 @@ else:
 
 
 
-```
+```python
 # All the words
 all_words = re.findall(r"\b[a-zA-Z]+\b", text)
 all_words[0:5]
 ```
 
 
-```
+```python
 # words (allowing numbers and underline) but lower case
 re.findall(r"\b\w+\b", text.lower())[0:5]
 ```
 
 
-```
+```python
 # numbers
 re.findall(r"\b\d+\b", text)
 ```
 
 
-```
+```python
 regular = re.search(r'[A-Z][a-z]+',text)
 short = re.search(r'[A-Z][a-z]?',text)
 ```
 
 
-```
+```python
 #Compare these
 plus = re.findall(r'[A-Z][a-z ]+',text)
 plusq = re.findall(r'[A-Z][a-z ]+?',text)
 ```
 
 
-```
+```python
 # Finding capitalized words
 re.findall(r"\b[A-Z][a-z]*\b", text)
 ```
 
 
-```
+```python
 # Problem: Find all sentences (Start with capital letter, end with period. Remember to use `\.`
 ```
 
 ## An example
 
 
-```
+```python
 with open("data/filenames.txt","r") as f:
     filenames = f.readlines()
 print(filenames[0])
@@ -139,26 +138,26 @@ filenames = [x.strip() for x in filenames] #get rid of the newlines
 ```
 
 
-```
+```python
 # Using alternation to select qmd or Rmd files
 selected = [x for x in filenames if re.match(r".*\.(qmd|Rmd)",x)]
 rejected = [x for x in filenames if not re.match(r".*\.(qmd|Rmd)",x)]
 ```
 
 
-```
+```python
 # Using grouping to extract netid
 matches = [re.search(r"_([a-z]{3}[0-9]{5})_",x) for x in selected]
 [x[1] for x in matches][0:5]
 ```
 
 
-```
+```python
 filenames = pd.read_csv("data/filenames.txt",names=["Name"])
 ```
 
 
-```
+```python
 filenames['Name'].map(lambda x: re.search(r"_([a-z]{3}[0-9]{5})_",x)[1])
 filenames = filenames.assign(netid = filenames['Name'].map(lambda x: re.search(r"_([a-z]{3}[0-9]{5})_",x)[1])
  )
@@ -168,7 +167,7 @@ filenames = filenames.assign(extension = filenames['Name'].map(lambda x: re.sear
 Adding `(?P<name>...)` names the submatch.  You can then extract or refer to the submatch by name.
 
 
-```
+```python
 m = re.search(r"(?P<found>[a-z]{3})","abcdefghij")
 print(m[0],m.group(1),m.group('found'))
 ```
@@ -177,7 +176,7 @@ The `.str.extract` method is a powerful way to pick apart a string into columns
 in a pandas dataframe.  It combines the operations above into a single operation.  Combining it with named submatches gives names to the new columns.
 
 
-```
+```python
 filenames = pd.read_csv("data/filenames.txt",names=["Name"])
 filenames=filenames['Name'].str.extract(r"(?P<name>.*_(?P<netid>[a-z]{3}[0-9]{5})_.*\.(?P<extension>qmd|Rmd|pdf))$")
 ```

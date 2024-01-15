@@ -1,9 +1,9 @@
 ---
-title: Plotting (in Python)
-subtitle: Fundamentals of Data Science
-format: html
-author: Jeremy Teitelbaum
+layout: default
+title: Plotting in python
+nav_exclude: true
 ---
+
 The main tool for plotting in R is `ggplot`, which we have talked about
 a little and which will be covered in detail in other courses.
 
@@ -27,7 +27,7 @@ the others on your own to see what you like best.
 We'll work with the `penguins` dataset.
 
 
-```
+```python
 import matplotlib.pyplot as plt  # this gives a "matlab"-like interface to matplotlib
 import pandas as pd
 import numpy as np
@@ -46,7 +46,7 @@ collection of axes organized into a single picture. To work with
 `matplotlib` one first creates a figure and then adds axes to it.
 
 
-```
+```python
 fig = plt.figure(figsize=(3, 4))
 axes = fig.add_subplot(
     1, 1, 1
@@ -57,7 +57,7 @@ axes.plot(x, y)  # plot y vs x
 You can plot multiple things on on set of axes. We also add a grid.
 
 
-```
+```python
 axes.plot(x, 1 - 2 * y)
 axes.grid(True)
 fig
@@ -66,7 +66,7 @@ fig
 If we want a 2x2 array of plots, we could proceed like this.
 
 
-```
+```python
 fig = plt.figure(figsize=(4, 3))
 axes1 = fig.add_subplot(2, 2, 1)
 axes2 = fig.add_subplot(2, 2, 2)
@@ -81,7 +81,7 @@ axes4.plot(x, -y + 2)
 There are lots of types of plots, as always.
 
 
-```
+```python
 fig = plt.figure(figsize=(6, 8))
 axes1 = fig.add_subplot(2, 2, 1)
 axes2 = fig.add_subplot(2, 2, 2)

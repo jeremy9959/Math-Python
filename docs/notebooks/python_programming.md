@@ -1,10 +1,9 @@
 ---
-title: Basics of Programming in Python
-subtitle: Fundamentals of Data Science
-author: Jeremy Teitelbaum
-format: html
-title-block-style: plain
+layout: default
+title: Programming basics
+nav_exclude: true
 ---
+
 ## Basics of programming in python
 
 Key ingredients of programming language:
@@ -27,7 +26,7 @@ Key ingredients of programming language:
 From before, remember:
 
 
-```
+```python
 n = 56  # integer
 m = 1234.48  # floating point
 L = [1, 2, 3, 4]  # list
@@ -37,7 +36,7 @@ name = "Jeremy"  # string
 The `typeof` operator tells you what something is.
 
 
-```
+```python
 print("type of n is {}, type of name is {}".format(type(n), type(name)))
 ```
 
@@ -46,7 +45,7 @@ print("type of n is {}, type of name is {}".format(type(n), type(name)))
 Split a string to a list.
 
 
-```
+```python
 L = list("My name is Jeremy")
 print(L)
 ```
@@ -54,7 +53,7 @@ print(L)
 Join a list to a string.
 
 
-```
+```python
 print(''.join(["A","B","C"]))
 print('_'.join(["A","B","C"]))
 ```
@@ -64,7 +63,7 @@ print('_'.join(["A","B","C"]))
 A dictionary (or a HashMap, or an associative array) is like an array with arbitrary subscripts.
 
 
-```
+```python
 D = {"first_name": "Jeremy", "last_name": "Teitelbaum"}
 D["middle_name"] = "Thau"
 print(D["first_name"])
@@ -76,7 +75,7 @@ print(D)
 ## Arrays
 
 
-```
+```python
 import numpy as np
 
 x=np.array([1,2,3,4])
@@ -86,7 +85,7 @@ x=np.linspace(-5,5,10)
 ## Booleans
 
 
-```
+```python
 T = True
 F = False
 print(T or F) # or
@@ -103,7 +102,7 @@ print(y)
 ## Functions
 
 
-```
+```python
 import scipy.stats as sps
 
 def my_function(n,mu,s):
@@ -125,7 +124,7 @@ Exception: some operations (such as list append) modify an element in place and 
 you may end up modifying something. 
 
 
-```
+```python
 def f(a,b):
     x=a+b
     return x
@@ -138,7 +137,7 @@ print("after executing f, x={}".format(x))
 ```
 
 
-```
+```python
 def f(x):
     x=x+["d"]
     return x
@@ -150,7 +149,7 @@ print("L after is {}".format(L))
 ```
 
 
-```
+```python
 def f(x):
     x.append("d") #
     return x
@@ -162,7 +161,7 @@ print(x)
 ```
 
 
-```
+```python
 x = 55
 
 def f(n):
@@ -175,7 +174,7 @@ f(24)
 ## Iteration
 
 
-```
+```python
 for x in range(10):
     print(x,end=',')
 print('\n---')
@@ -189,7 +188,7 @@ for x in ["a","b","c"]:
 ## Logic
 
 
-```
+```python
 if 3<5:
     print("ha")
 else:
@@ -197,7 +196,7 @@ else:
 ```
 
 
-```
+```python
 if 3+5==8 and 3-5==-2:
     print("Yeah!")
 else:
@@ -205,7 +204,7 @@ else:
 ```
 
 
-```
+```python
 if 3+5 in [1,2,3,4,5,6,7]:
     print("Yeah")
 else:
@@ -217,7 +216,7 @@ else:
 This is one of the most useful things about python.
 
 
-```
+```python
 L = ["hello","Hello","HELLO","jeremy","jereMy"]
 N = [f(x) for x in L]
 M = [f(x) for x in L if x[0]=="H"]
@@ -227,7 +226,7 @@ print(N,M)
 Another example.
 
 
-```
+```python
 s="Jeremy Teitelbaum"
 L=[x for x in list(s) if x not in [" "]]
 print(L)
@@ -236,7 +235,7 @@ print(L)
 Compare:
 
 
-```
+```python
 S=""
 for x in "Jeremy Teitelbaum":
     if x not in [" "]:
@@ -250,7 +249,7 @@ for x in "Jeremy Teitelbaum":
 
 
 
-```
+```python
 def f(x=0,y=1):
     return x+y
 
@@ -260,7 +259,7 @@ print(f(3,4))
 ```
 
 
-```
+```python
 def first_letter_cap(s):
     "Returns s but first letter of string is upper case"
     return s[0].upper()+s[1:]
@@ -271,7 +270,7 @@ def first_letter_cap(s):
 Take a string and make its first character upper case and the rest lower. 
 
 
-```
+```python
 def f(s):
     l = s[0].upper()+s[1:].lower()
     return l
@@ -282,7 +281,7 @@ print(f("hello"),f("Hello"),f("HELLO"))
 Now do this for each element of a list. 
 
 
-```
+```python
 def h(L):
     N=[]
     for x in L:
@@ -306,7 +305,7 @@ which is a fancy type of tabular layout.
 It has named columns that you can extract with `.columns`
 
 
-```
+```python
 import pandas as pd
 penguins_raw = pd.read_csv("data/penguins-raw.csv")
 penguins_raw.columns
@@ -329,7 +328,7 @@ function which computes the square root using this iteration.  You should contin
 until $x_{k+1}$ is within $10^{-6}$ of $x_{k}$. 
 
 
-```
+```python
 # def f(n):
 # 
 # ...
