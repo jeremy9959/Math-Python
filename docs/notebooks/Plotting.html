@@ -1,0 +1,327 @@
+<div class="cell raw">
+
+</div>
+<div class="cell markdown">
+<p>The main tool for plotting in R is <code>ggplot</code>, which we have talked about a little and which will be covered in detail in other courses.</p>
+<p>The purpose of this lesson is to talk about tools for plotting in Python. Here the situation is more diverse, and there are a number of different plotting packages with different capabilities. The most notable ones are:</p>
+<ul>
+<li><code>matplotlib</code> the most fundamental package. Very capable but old-fashioned and the output isn't of the highest graphical quality.</li>
+<li><code>bokeh</code> which offers high quality visuals and interactivity.<br />
+</li>
+<li><code>altair</code> which is a package that has similar syntax to <code>ggplot</code> and follows the Wilkinson "Grammar of Graphics" philosophy</li>
+<li><code>plotly</code> which offers even more opportunities for interactivity</li>
+<li><code>seaborn</code> which has very high quality visuals and is very common in publications especially in genomics.</li>
+</ul>
+<p>We'll discuss <code>matplotlib</code>, <code>bokeh</code>, and <code>seaborn</code> and you can explore the others on your own to see what you like best.</p>
+<p>We'll work with the <code>penguins</code> dataset.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  <span class="co"># this gives a &quot;matlab&quot;-like interface to matplotlib</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/penguins-raw.csv&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> penguins.drop(<span class="st">&quot;Comments&quot;</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>penguins.dropna()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span></span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>The <code>matplotlib</code> package is organized around <code>figures</code> and <code>axes</code>. Essentially, a set of <code>axes</code> is a single graph, and a <code>figure</code> is a collection of axes organized into a single picture. To work with <code>matplotlib</code> one first creates a figure and then adds axes to it.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> fig.add_subplot(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># here we are saying the figure will have 1 row, 1 column, and this is plot number 1.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>axes.plot(x, y)  <span class="co"># plot y vs x</span></span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>You can plot multiple things on on set of axes. We also add a grid.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>axes.plot(x, <span class="dv">1</span> <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> y)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>axes.grid(<span class="va">True</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>If we want a 2x2 array of plots, we could proceed like this.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>axes1 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>axes2 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>axes3 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>axes4 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>axes1.plot(x, y)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>axes2.plot(x, <span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>axes3.plot(x, <span class="op">-</span>y)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>axes4.plot(x, <span class="op">-</span>y <span class="op">+</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>There are lots of types of plots, as always.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>axes1 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>axes2 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>axes3 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>axes4 <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>axes1.plot(x, y)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>axes2.scatter(penguins[<span class="st">&quot;Body Mass (g)&quot;</span>], penguins[<span class="st">&quot;Flipper Length (mm)&quot;</span>], s<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>axes3.plot(x, <span class="op">-</span>y, color<span class="op">=</span><span class="st">&quot;green&quot;</span>, linestyle<span class="op">=</span><span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>axes4.plot(x, <span class="op">-</span>y <span class="op">+</span> <span class="dv">2</span>, color<span class="op">=</span><span class="st">&quot;blue&quot;</span>, linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>You need titles (for the figure and the individual plots) and axis labels.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig.set_size_inches(<span class="dv">12</span>, <span class="dv">12</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">&quot;Demonstration Plot&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>axes1.set_title(<span class="st">&quot;A Parabola&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>axes1.set_xlabel(<span class="st">&quot;x&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>axes1.set_ylabel(<span class="st">&quot;y&quot;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>axes1.grid(<span class="va">True</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>axes2.set_title(<span class="st">&quot;A scatter plot&quot;</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>axes3.set_title(<span class="st">&quot;A green</span><span class="ch">\n</span><span class="st"> upside-down parabola&quot;</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>axes4.set_title(<span class="st">&quot;A blue parabola&quot;</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Let's look at a fully developed scatter plot.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># fig.suptitle(&quot;Flipper Length vs Body Mass&quot;)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>axes.grid(<span class="va">True</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>axes.set_xlabel(<span class="st">&quot;Body Mass (g)&quot;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>axes.set_ylabel(<span class="st">&quot;Flipper Length (mm)&quot;</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>axes.set_title(<span class="st">&quot;Flipper Length vs Body Mass&quot;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># axes.set_xlim(0,5500)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># axes.set_ylim(0,300)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>Males <span class="op">=</span> penguins[penguins[<span class="st">&quot;Sex&quot;</span>] <span class="op">==</span> <span class="st">&quot;MALE&quot;</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>Females <span class="op">=</span> penguins[penguins[<span class="st">&quot;Sex&quot;</span>] <span class="op">==</span> <span class="st">&quot;FEMALE&quot;</span>]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>male_plot <span class="op">=</span> axes.scatter(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>Males[<span class="st">&quot;Body Mass (g)&quot;</span>], y<span class="op">=</span>Males[<span class="st">&quot;Flipper Length (mm)&quot;</span>], c<span class="op">=</span><span class="st">&quot;blue&quot;</span>, label<span class="op">=</span><span class="st">&quot;Male&quot;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>female_plot <span class="op">=</span> axes.scatter(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>Females[<span class="st">&quot;Body Mass (g)&quot;</span>],</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>Females[<span class="st">&quot;Flipper Length (mm)&quot;</span>],</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">&quot;Female&quot;</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>axes.legend([<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>])</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Finally we can generate a multiple plot.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">30</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Males <span class="op">=</span> penguins[penguins[<span class="st">&quot;Sex&quot;</span>] <span class="op">==</span> <span class="st">&quot;MALE&quot;</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Females <span class="op">=</span> penguins[penguins[<span class="st">&quot;Sex&quot;</span>] <span class="op">==</span> <span class="st">&quot;FEMALE&quot;</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;Culmen Length (mm)&quot;</span>, <span class="st">&quot;Culmen Depth (mm)&quot;</span>, <span class="st">&quot;Flipper Length (mm)&quot;</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>, <span class="dv">1</span>, i <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    axes.grid(<span class="va">True</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    axes.set_title(<span class="ss">f&quot;</span><span class="sc">{x}</span><span class="ss"> vs Body Mass&quot;</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    male_plot <span class="op">=</span> axes.scatter(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>Males[<span class="st">&quot;Body Mass (g)&quot;</span>], y<span class="op">=</span>Males[x], c<span class="op">=</span><span class="st">&quot;blue&quot;</span>, label<span class="op">=</span><span class="st">&quot;Male&quot;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    female_plot <span class="op">=</span> axes.scatter(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>Females[<span class="st">&quot;Body Mass (g)&quot;</span>], y<span class="op">=</span>Females[x], c<span class="op">=</span><span class="st">&quot;red&quot;</span>, label<span class="op">=</span><span class="st">&quot;Female&quot;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    axes.legend([<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>])</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Matplotlib also offers a histogram command.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>axes.grid(<span class="va">True</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>axes.set_title(<span class="st">&quot;Distribution of Body Mass (Male and Female)&quot;</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>axes.hist(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    Males[<span class="st">&quot;Body Mass (g)&quot;</span>],</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">&quot;forestgreen&quot;</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    density<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">&quot;Male&quot;</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>axes.hist(</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    Females[<span class="st">&quot;Body Mass (g)&quot;</span>],</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">&quot;orange&quot;</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    density<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">&quot;Female&quot;</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>axes.legend([<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>])</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>There are millions of others.....</p>
+<h2 id="seaborn">Seaborn</h2>
+<p>Seaborn is based on matplotlib but the graphics are of higher quality (IMHO) and many of the plots published in scientific journals in biology are recognizably seaborn.</p>
+<p>Seaborn is also better at handling data sources than matplotlib and has built in statistical capabilities (box plots, density curves, fitted lines...)</p>
+<p>Ultimately to make seaborn really work you need to know matplotlib well.</p>
+<p>See <a href="https://seaborn.pydata.org/index.html">the seaborn documentation</a></p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>We can declare a data source for our plots.</p>
+<p>A scatter plot is called a <code>relplot</code> for "relationship plot".</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, y<span class="op">=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>penguins, col<span class="op">=</span><span class="st">&quot;Sex&quot;</span>, hue<span class="op">=</span><span class="st">&quot;Species&quot;</span>, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, y<span class="op">=</span><span class="st">&quot;Flipper Length (mm)&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.relplot(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>penguins, hue<span class="op">=</span><span class="st">&quot;Species&quot;</span>, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, y<span class="op">=</span><span class="st">&quot;Flipper Length (mm)&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Seaborn has some built-in statistical stuff, like <code>ggplot</code> does.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sns.lmplot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, y<span class="op">=</span><span class="st">&quot;Flipper Length (mm)&quot;</span>, hue<span class="op">=</span><span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Histograms are <code>displots</code>.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># displot is a facetgrid object with multiple axes within it; you need to</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># get at those to mess with titles, etc.</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, hue<span class="op">=</span><span class="st">&quot;Species&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ax.axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">&quot;Distribution of Body Mass&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Here are some examples of what you can do with seaborn. Let's clean up the species names and the sex field first.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">&quot;SpeciesS&quot;</span>] <span class="op">=</span> penguins[<span class="st">&quot;Species&quot;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.split(<span class="st">&quot; &quot;</span>)[<span class="dv">0</span>])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">&quot;Sex&quot;</span>] <span class="op">=</span> penguins[<span class="st">&quot;Sex&quot;</span>].<span class="bu">apply</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: x <span class="cf">if</span> <span class="bu">type</span>(x) <span class="op">!=</span> <span class="bu">str</span> <span class="cf">else</span> x[<span class="dv">0</span>] <span class="op">+</span> x[<span class="dv">1</span>:].lower()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>You can split the histograms by species.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, col<span class="op">=</span><span class="st">&quot;SpeciesS&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ax.set_titles(<span class="st">&quot;</span><span class="sc">{col_name}</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>You can split the histograms by species and sex, and add density curves if you want.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, col<span class="op">=</span><span class="st">&quot;SpeciesS&quot;</span>, row<span class="op">=</span><span class="st">&quot;Sex&quot;</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ax.set_titles(<span class="st">&quot;</span><span class="sc">{col_name}</span><span class="st">|</span><span class="sc">{row_name}</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>You can add colors if you want.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, row<span class="op">=</span><span class="st">&quot;Sex&quot;</span>, kde<span class="op">=</span><span class="va">True</span>, hue<span class="op">=</span><span class="st">&quot;SpeciesS&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ax.set_titles(<span class="st">&quot;</span><span class="sc">{row_name}</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Among the other types of plots you can get are:</p>
+<p>Bar Plots</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.catplot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;SpeciesS&quot;</span>, kind<span class="op">=</span><span class="st">&quot;count&quot;</span>, hue<span class="op">=</span><span class="st">&quot;Sex&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Box Plots</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.boxplot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, y<span class="op">=</span><span class="st">&quot;SpeciesS&quot;</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> ax.set_ylabel(<span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Violin Plots</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.violinplot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, y<span class="op">=</span><span class="st">&quot;SpeciesS&quot;</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> ax.set_ylabel(<span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>There are many other things you can do. See the <a href="https://seaborn.pydata.org/examples/index.html">seaborn plot gallery</a>.</p>
+<h2 id="bokeh">Bokeh</h2>
+<p>Bokeh is an open source plotting package that is not derived from matplotlib. It has an underlying javascript engine that provides interactivity.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure, output_file, output_notebook, show</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.models <span class="im">import</span> ColumnDataSource</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>output_notebook()</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>We setup a ColumnDataSource from our penguins dataframe.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>penguins_source <span class="op">=</span> ColumnDataSource(penguins)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>We plot by creating a <code>figure</code> and adding things to it.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> figure()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>F.scatter(x<span class="op">=</span><span class="st">&quot;Body Mass (g)&quot;</span>, y<span class="op">=</span><span class="st">&quot;Culmen Length (mm)&quot;</span>, source<span class="op">=</span>penguins_source)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>show(F)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>One of the nice featues of Bokeh is that we can add interactive tools to it.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;Body Mass (g)&quot;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="st">&quot;Culmen Length (mm)&quot;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>tooltips <span class="op">=</span> [</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Mass&quot;</span>, <span class="st">&quot;@{Body Mass (g)}&quot;</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Length&quot;</span>, <span class="st">&quot;@{Culmen Length (mm)}&quot;</span>),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Sex&quot;</span>, <span class="st">&quot;@Sex&quot;</span>),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> figure(x_axis_label<span class="op">=</span>x, y_axis_label<span class="op">=</span>y, title<span class="op">=</span><span class="ss">f&quot;</span><span class="sc">{y}</span><span class="ss"> vs </span><span class="sc">{x}</span><span class="ss">&quot;</span>, tooltips<span class="op">=</span>tooltips)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>F.scatter(x<span class="op">=</span>x, y<span class="op">=</span>y, source<span class="op">=</span>penguins_source)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>show(F)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>To color something, we create a color mapper function.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.transform <span class="im">import</span> factor_cmap</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>color_mapper <span class="op">=</span> factor_cmap(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;SpeciesS&quot;</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span>[<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>],</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    factors<span class="op">=</span>[<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>, <span class="st">&quot;Chinstrap&quot;</span>],</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> figure(x_axis_label<span class="op">=</span>x, y_axis_label<span class="op">=</span>y, title<span class="op">=</span><span class="ss">f&quot;</span><span class="sc">{y}</span><span class="ss"> vs </span><span class="sc">{x}</span><span class="ss">&quot;</span>, tooltips<span class="op">=</span>tooltips)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>F.scatter(</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>x,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">7</span>,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    fill_color<span class="op">=</span>factor_cmap(</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;SpeciesS&quot;</span>,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>        palette<span class="op">=</span>[<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>],</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        factors<span class="op">=</span>[<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>, <span class="st">&quot;Chinstrap&quot;</span>],</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    source<span class="op">=</span>penguins_source,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>show(F)</span></code></pre></div>
+</div>

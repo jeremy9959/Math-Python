@@ -1,0 +1,157 @@
+<div class="cell raw">
+
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regular Expressions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">Long ago, I travelled to the far west, seeking my fortune. I found</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">frosty mountains, arid deserts, lush oases, and a huge ocean.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">At times, I was gripped by despair, and at other times filled with Joy.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">- Anonymous, 1865</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/filenames.txt&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    filenames <span class="op">=</span> f.readlines()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filenames[<span class="dv">0</span>])</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<h2 id="guide-works-in-both-python-and-r">Guide (works in both python and R)</h2>
+<ul>
+<li>Letters, Numbers match themselves</li>
+<li>'.' matches one of anything</li>
+<li>'+' means one or more of the preceeding</li>
+<li>'*' means 0 or more of the preceding</li>
+<li>'?' matches 0 or 1 occurrences of the previous pattern.</li>
+<li>[] groups things ([A-Z]+ matches a sequence of one or more capital letters); [^...] matches anything <em>not</em> in the range.</li>
+<li>'\w' matches "word" characters (`[a-zA-Z0-9_]')</li>
+<li>'\W' matches non-word characters</li>
+<li>'\b' matches boundaries (end or start of string)</li>
+<li>'{5}'' matches 5 times</li>
+<li>'{3,5}' matches 3, 4 or 5 occurrences.</li>
+<li>'{3,}' matches 3 or more occurrences</li>
+<li>'\s' matches whitespace</li>
+<li>'\S' matches non-whitespace</li>
+<li>'^....' matches at the start of a line</li>
+<li>'...$' matches at the end of a line</li>
+<li>'(a|b)' matches a or b.</li>
+<li>Use backslash to escape.</li>
+</ul>
+<h2 id="key-functions">Key functions</h2>
+<ul>
+<li><code>match</code> finds matches <em>at the start of the string</em>; returns None if it doesn't find one, otherwise returns match object.</li>
+<li><code>search</code> finds matches; returns None if it doesn't find one, otherwise returns first match object</li>
+<li><code>findall</code> returns a list of all matches (not match objects)</li>
+<li><code>finditer</code> iterates over matches</li>
+</ul>
+<h2 id="match-objects">Match objects</h2>
+<ul>
+<li>if <code>m</code> is a match object, then
+<ol>
+<li><code>m[0]</code> is the match</li>
+<li><code>m[2]</code>, <code>m[3]</code> and so on are the subgroup matches</li>
+<li><code>m.span(n)</code> is (start, stop) for match n.</li>
+<li><code>m.start(n)</code> and <code>m.end(n)</code> are the start and end of match n.</li>
+<li><code>m.string</code> is the string being matched against</li>
+</ol></li>
+</ul>
+<h2 id="looking-for-explicit-strings">Looking for explicit strings</h2>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> re.search(<span class="vs">r&quot;travel&quot;</span>, text):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;No&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> re.match(<span class="vs">r&quot;travel&quot;</span>, text):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;No&quot;</span>)</span></code></pre></div>
+</div>
+<section id="some-fancier-examples" class="cell markdown">
+<h2>Some fancier examples</h2>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All the words</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_words <span class="op">=</span> re.findall(<span class="vs">r&quot;\b[a-zA-Z]+\b&quot;</span>, text)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>all_words[<span class="dv">0</span>:<span class="dv">5</span>]</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># words (allowing numbers and underline) but lower case</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>re.findall(<span class="vs">r&quot;\b\w+\b&quot;</span>, text.lower())[<span class="dv">0</span>:<span class="dv">5</span>]</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># numbers</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>re.findall(<span class="vs">r&quot;\b\d+\b&quot;</span>, text)</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>regular <span class="op">=</span> re.search(<span class="vs">r&#39;[A-Z][a-z]+&#39;</span>,text)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>short <span class="op">=</span> re.search(<span class="vs">r&#39;[A-Z][a-z]?&#39;</span>,text)</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Compare these</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plus <span class="op">=</span> re.findall(<span class="vs">r&#39;[A-Z][a-z ]+&#39;</span>,text)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plusq <span class="op">=</span> re.findall(<span class="vs">r&#39;[A-Z][a-z ]+?&#39;</span>,text)</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding capitalized words</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>re.findall(<span class="vs">r&quot;\b[A-Z][a-z]*\b&quot;</span>, text)</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Problem: Find all sentences (Start with capital letter, end with period. Remember to use `\.`</span></span></code></pre></div>
+</div>
+<section id="an-example" class="cell markdown">
+<h2>An example</h2>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/filenames.txt&quot;</span>,<span class="st">&quot;r&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    filenames <span class="op">=</span> f.readlines()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filenames[<span class="dv">0</span>])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> [x.strip() <span class="cf">for</span> x <span class="kw">in</span> filenames] <span class="co">#get rid of the newlines</span></span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using alternation to select qmd or Rmd files</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>selected <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> filenames <span class="cf">if</span> re.match(<span class="vs">r&quot;.*\.(qmd|Rmd)&quot;</span>,x)]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>rejected <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> filenames <span class="cf">if</span> <span class="kw">not</span> re.match(<span class="vs">r&quot;.*\.(qmd|Rmd)&quot;</span>,x)]</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using grouping to extract netid</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> [re.search(<span class="vs">r&quot;_([a-z]</span><span class="sc">{3}</span><span class="vs">[0-9]</span><span class="sc">{5}</span><span class="vs">)_&quot;</span>,x) <span class="cf">for</span> x <span class="kw">in</span> selected]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>[x[<span class="dv">1</span>] <span class="cf">for</span> x <span class="kw">in</span> matches][<span class="dv">0</span>:<span class="dv">5</span>]</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/filenames.txt&quot;</span>,names<span class="op">=</span>[<span class="st">&quot;Name&quot;</span>])</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>filenames[<span class="st">&#39;Name&#39;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: re.search(<span class="vs">r&quot;_([a-z]</span><span class="sc">{3}</span><span class="vs">[0-9]</span><span class="sc">{5}</span><span class="vs">)_&quot;</span>,x)[<span class="dv">1</span>])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> filenames.assign(netid <span class="op">=</span> filenames[<span class="st">&#39;Name&#39;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: re.search(<span class="vs">r&quot;_([a-z]</span><span class="sc">{3}</span><span class="vs">[0-9]</span><span class="sc">{5}</span><span class="vs">)_&quot;</span>,x)[<span class="dv">1</span>])</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> filenames.assign(extension <span class="op">=</span> filenames[<span class="st">&#39;Name&#39;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: re.search(<span class="vs">r&quot;.*\.(qmd|Rmd|pdf)$&quot;</span>,x)[<span class="dv">1</span>]))</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>Adding <code>(?P&lt;name&gt;...)</code> names the submatch. You can then extract or refer to the submatch by name.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> re.search(<span class="vs">r&quot;(?P&lt;found&gt;[a-z]</span><span class="sc">{3}</span><span class="vs">)&quot;</span>,<span class="st">&quot;abcdefghij&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m[<span class="dv">0</span>],m.group(<span class="dv">1</span>),m.group(<span class="st">&#39;found&#39;</span>))</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>The <code>.str.extract</code> method is a powerful way to pick apart a string into columns in a pandas dataframe. It combines the operations above into a single operation. Combining it with named submatches gives names to the new columns.</p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/filenames.txt&quot;</span>,names<span class="op">=</span>[<span class="st">&quot;Name&quot;</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>filenames<span class="op">=</span>filenames[<span class="st">&#39;Name&#39;</span>].<span class="bu">str</span>.extract(<span class="vs">r&quot;(?P&lt;name&gt;.*_(?P&lt;netid&gt;[a-z]</span><span class="sc">{3}</span><span class="vs">[0-9]</span><span class="sc">{5}</span><span class="vs">)_.*\.(?P&lt;extension&gt;qmd|Rmd|pdf))$&quot;</span>)</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>There are many other useful operations available with the pandas str library.</p>
+<ul>
+<li><code>str.split</code></li>
+<li><code>str.replace</code></li>
+<li><code>str.cat</code> (joins strings together with argument <code>sep=</code>)</li>
+</ul>
+</div>

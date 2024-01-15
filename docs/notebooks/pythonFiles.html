@@ -1,0 +1,87 @@
+<div class="cell raw">
+
+</div>
+<div class="cell markdown">
+<p>We have already seen how to use the read_csv commands (in R and python/pandas) to read data from files into dataframes/tibbles. But sometimes we need to work directly with text files.</p>
+<h2 id="the-basics">The basics</h2>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#with open(&quot;path&quot;,&quot;r&quot;) as f:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    (put logic to read file here)</span></span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>This structure guarantees that the file will be properly closed when you're done.</p>
+<h4 id="slurp-up-the-whole-file-into-a-string">Slurp up the whole file into a string.</h4>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/gettysburg.txt&quot;</span>,<span class="st">&quot;r&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> f.read()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(data)</span></code></pre></div>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lines <span class="op">=</span> data.split(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> lines[:<span class="dv">10</span>]:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code></pre></div>
+</div>
+<section id="read-the-file-line-by-line" class="cell markdown">
+<h4>Read the file line by line</h4>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/gettysburg.txt&quot;</span>,<span class="st">&quot;r&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(line) </span></code></pre></div>
+</div>
+<section id="read-a-line-from-the-file" class="cell markdown">
+<h4>Read a line from the file</h4>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/gettysburg.txt&quot;</span>,<span class="st">&quot;r&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> f.readline()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(line)</span></code></pre></div>
+</div>
+<section id="slurp-the-file-into-a-list" class="cell markdown">
+<h4>Slurp the file into a list</h4>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/gettysburg.txt&quot;</span>,<span class="st">&quot;r&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    line_list <span class="op">=</span> f.readlines()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>lowercase <span class="op">=</span> [x.lower() <span class="cf">for</span> x <span class="kw">in</span> line_list]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>lowercase</span></code></pre></div>
+</div>
+<section id="writing-to-a-file" class="cell markdown">
+<h2>Writing to a file</h2>
+<p>An entire string to the file. <strong>This will overwrite what is in the file.</strong></p>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/gettysburg_lower.txt&quot;</span>,<span class="st">&quot;w&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>.join(lowercase))</span></code></pre></div>
+</div>
+<div class="cell markdown">
+<p>One line at a time. <strong>This will overwrite what is in the file.</strong></p>
+</div>
+<div class="cell code">
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/gettysburg_lower.txt&quot;</span>,<span class="st">&quot;w&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> lowercase:</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        f.write(x<span class="op">+</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<section id="appending-to-a-file" class="cell markdown">
+<h2>Appending to a file</h2>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;data/gettysburg_lower.txt&quot;</span>,<span class="st">&quot;a&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">&quot;This goes at the end</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<section id="working-with-directories-folders" class="cell markdown">
+<h2>Working with directories (folders)</h2>
+</section>
+<div class="cell code">
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shutil</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#os.getcwd()</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#os.chdir(&#39;/home/jet08013&#39;)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#os.getcwd()</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#files = os.listdir(&#39;.&#39;)</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#os.rename()</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#shutil.copy()</span></span></code></pre></div>
+</div>
