@@ -1,3 +1,9 @@
+---
+layout: default
+title: Jupyter Lab Walkthrough
+nav_exclude: true
+---
+
 # Jupyter Lab Project Walkthrough
 
 1. Use the 'text editor' feature in Jupyter Lab to create your README.md file.
