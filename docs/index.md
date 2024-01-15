@@ -58,6 +58,9 @@ language features.  It also teaches a lot about the language internals.
 it includes a quick intro to the language generally and
 then a detailed discussion of tools for data manipulation and visualization.
 
+In addition, [this page](links.md) includes links to other documents I have created for other courses on a variety of topics.
+
+
 
 ### Tools
 
@@ -73,4 +76,9 @@ This also includes `jupyter` which is a commonly used environment for working wi
 
 2. [vscode](https://code.visualstudio.com) This is an "IDE" (integrated development environment). It's like the ultimate text editor. 
 It provides a huge collection of tools for writing code and is useful for writing LaTeX and pretty much anything else.
+
+An  alternative to installing software on your computer is to use a cloud resource.  There are a number of these available, but 
+the most straightforward is [google colab](http://colab.research.google.com).  You will need a google account to use this.  The advantage
+of using this is that we don't have to mess with loading packages and you have easy access to a basic gpu for deep learning applications.
+The disadvantage is that you give up a lot of control, you need internet access and you don't have the full suite of capabilities of vscode.
 
