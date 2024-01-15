@@ -35,6 +35,8 @@ then a detailed discussion of tools for data manipulation and visualization.
 
 ## Python documents from other Teitelbaum courses
 
+#### Grad5100
+
 Some walkthroughs from my Grad 5100 (Fundamentals of Data Science) course.
 
 1. [Jupyter walkthrough](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/02-JupyterBasics/jupyter-walkthrough.html) - [ipynb download](notebooks/JupyterWalkthrough.ipynb)
@@ -43,4 +45,19 @@ Some walkthroughs from my Grad 5100 (Fundamentals of Data Science) course.
 4. [Files in Python](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/09-Regexps/pythonFiles.html) - [ipynb download](notebooks/pythonFiles.ipynb)
 5. [Regular Expressions](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/09-Regexps/regexpsPython.html) - [ipynb download](notebooks/regexpsPython.ipynb)
 6. [Plotting](https://github.uconn.edu/pages/jet08013/Grad5100/chapters/13-Plotting/Plotting.html) -  [ipynb download](notebooks/Plotting.ipynb)
+
+
+#### Math for Machine Learning
+
+The page [Math-3094-UConn](jeremy9959.net/Math-3094-UConn/topics.html) includes material on classic machine learrning algorithms in python. 
+
+[This page](https://jeremy9959.net/Math-3094-UConn/LabResources.html)  has some introductory materials.  
+In addition here are links to labs (notebook files) on 
+
+- [Linear Regression](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/RegressionLab.zip)
+- [Gradient Descent](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/gradient_descent.zip)
+- [Naive Bayes](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/naive_bayes.zip)
+- [Logistic Regression](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/logistic.zip)
+- [Principal Component Analysis](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/PCALab.zip)
+- [Neural Networks](https://jeremy9959.net/Math-3094-UConn/publiished_notes/notes/neural.zip)
 
