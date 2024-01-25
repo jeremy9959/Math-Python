@@ -53,3 +53,6 @@ Here are links to labs (notebook files and data) on
 - [Principal Component Analysis](https://jeremy9959.net/Math-3094-UConn/published_notes/notes/PCALab.zip)
 - [Neural Networks](https://jeremy9959.net/Math-3094-UConn/publiished_notes/notes/neural.zip)
 
+#### Class Notes
+
+- [January 23 (is_prime)](notebooks/PrimeTesting.ipynb)
