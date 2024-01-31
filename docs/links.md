@@ -55,5 +55,5 @@ Here are links to labs (notebook files and data) on
 
 #### Number Theory (from class)
 
-- [January 23 (is_prime)](notebooks/PrimeTesting.html) [ipynb file](notebooks/PrimeTesting.ipynb)
-- [January 30 (some number theory experiments)](notebooks/primes.html) [ipynb file](notebooks/primes.ipynb)
+- [January 24 (is_prime)](notebooks/PrimeTesting.html) [ipynb file](notebooks/PrimeTesting.ipynb)
+- [January 31 (some number theory experiments)](notebooks/primes.html) [ipynb file](notebooks/primes.ipynb) [eratosthenes.py](src/eratosthenes.py)
