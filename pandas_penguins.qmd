@@ -1,0 +1,366 @@
+--- 
+title: "Working with data in python/pandas"
+subtitle: "Fundamentals of Data Science"
+author: "Jeremy Teitelbaum"
+jupyter: 
+    kernelspec: 
+        name: "base"
+        language: "python"
+        display_name: "python3"
+---
+
+## Loading the key libraries
+```{python}
+import sys
+import pandas as pd
+import numpy as np
+import re
+
+print(f"pandas version {pd.__version__}")
+print(f"numpy version {np.__version__}")
+print("\n".join(f"Python {sys.version}".split("|")))
+
+```
+
+## A comment on file formats
+
+The most common simple format for tabular data is comma separated or tab separated (`csv` or `tsv`).
+
+Newer formats such as `arrow` and `parquet` are more efficient in storage and faster to load.
+
+Pandas 2.0 can handle these newer formats.
+
+
+## Reading a dataframe
+
+```{python}
+# read from a csv file
+penguins = pd.read_csv("data/penguins-raw.csv")
+# read from a url
+# url = "https://raw.githubusercontent.com/mcnakhaee/palmerpenguins/master/palmerpenguins/data/penguins-raw.csv"
+# penguins = pd.read_csv(url)
+# read from an excel file
+# penguins = pd.read_excel('file.xlsx')
+rows, cols = penguins.shape
+print(f"Rows: {rows}, Columns: {cols}")
+print(f"Columns:", "\n".join(penguins.columns))
+```
+
+## Series 
+
+Each column of a dataframe is a series accessed by name.
+
+```{python}
+penguins["Culmen Length (mm)"]
+```
+
+Note the last row:
+- Name
+- Length
+- dtype
+
+Types are "inferred" by the read_csv function.
+
+## Another example
+
+```{python}
+penguins['Date Egg']
+```
+Here the type is "object" which is the generic python object.  But these are clearly supposed to be dates. We'll fix that later.
+
+## Alternative syntax
+
+```{python}
+# if the column name is simple, you can use a simpler syntax.
+penguins.Sex
+```
+
+## Value Counts
+
+The `value_counts` method returns a summary series.
+
+```{python}
+penguins['Island'].value_counts()
+```
+```{python}
+penguins['Species'].value_counts()
+```
+
+## Selecting a subset of columns
+
+```{python}
+simpler = penguins[['Species', 'Body Mass (g)', 'Flipper Length (mm)']]
+simpler.head()
+```
+
+## Index
+
+A dataframe has an index, which can be just the numbers from 0 to N as in this case.
+
+```{python}
+penguins.index
+```
+
+## Columns and Rows
+
+`loc` allows you to access individual elements.
+
+```{python}
+# The 23rd row
+penguins.loc[23,:]
+```
+
+```{python}
+penguins.loc[23,'Culmen Length (mm)']
+```
+
+```{python}
+penguins.loc[23:28,['Sex','Date Egg']]
+```
+
+
+## Filtering
+
+Filtering is done by using a boolean series as an index.  
+
+```{python}
+penguins['Sex']=='FEMALE'
+```
+
+```{python}
+females = penguins[penguins['Sex']=='FEMALE']
+females.head()
+```
+
+An alternative syntax is to use query.  The quoting rules here can be tricky.
+The query is a string, and column names are set off by backticks.  Using
+two different types of quotes allows the query to include a string.
+
+```{python}
+females = penguins.query("`Sex`=='FEMALE'")
+females.head()
+```
+
+## Fancier filtering
+
+```{python}
+penguins[penguins["Flipper Length (mm)"]>penguins["Body Mass (g)"]/20]
+```
+
+## Missing values
+
+Dealing with missing values is a central problem in data science.  One way to identify how many misssing values are out there is as follows:
+
+```{python}
+## Uses the fact that logical True counts as one, False as zero
+## sum() method sums by columns
+penguins.isna().sum()
+```
+
+Nearly all of the comments are empty.  What are they?
+
+```{python}
+comments = penguins['Comments'].value_counts()
+comments
+```
+
+Let's save the comments separately and look at the rest.
+
+```{python}
+# drop normally drops rows, but with axis=1 it drops columns
+penguins = penguins.drop('Comments',axis=1)
+```
+
+Various options:
+- drop rows with missing values
+- impute the missing values somehow
+
+## Drop rows with missing values
+
+```{python}
+# This makes a boolean where a row is True provided at least one of its entries are NA
+na_rows = (penguins.isna().any(axis=1))
+print(f"{na_rows.sum()} rows have NA somewhere outside of comments")
+```
+
+```{python}
+# here we keep rows only if no NA's.  Can also use notna().
+penguins_nona = penguins.loc[~na_rows,:]
+```
+
+## Imputation
+
+We saw above that culmen length has 2 missing values. We can use `fillna` to
+replace the missing values with something (like the mean or median or zero).
+
+```{python}
+# using equality w/o copy creates another reference.
+penguins_imputed = penguins.copy()
+culmen_mean = penguins_imputed['Culmen Length (mm)'].mean() # how does this handle NA values?
+print(f"Culmen length mean is {culmen_mean}")
+penguins_imputed['Culmen Length (mm)'] = penguins_imputed['Culmen Length (mm)'].fillna(culmen_mean)
+```
+
+There are many other imputation methods.  For example, if the data is ordered, you can fill 
+missing data with linear interpolation. (See the `interpolate` method).
+
+## Data types
+
+As we saw above, the types of the columns are inferred when the data is read.  But it's not always correct.  For example, the "Date Egg" column is supposed to be a date but it's shown as a generic python object. 
+
+Using the correct type can greatly improve performance as generic Python arguments
+are inefficient.
+
+In pandas 1.0 strings are always treated as objects but in pandas 2.0 there is a `StringDtype`.
+
+The most common types are:
+- object
+- float64
+- datetime (datetime64[ns])
+- int64
+- bool 
+
+One may also find categorical types. 
+
+```{python}
+penguins.dtypes
+```
+
+## Setting datatypes
+
+Here's an example where we manually make sex a categorical type.
+
+```{python}
+penguins = penguins.astype({'Sex':'category'})
+penguins['Sex']
+```
+
+One can also pass a dictionary setting the types of columns as an argument when
+you read them from the csv file.
+
+## Creating new columns 
+
+
+Simplifying the species name.
+
+```{python}
+def first_word(x):
+    return x.split()[0]
+penguins['SimpleSpecies'] = penguins['Species'].map(first_word)
+```
+
+Rewriting the body mass in kilograms.
+
+```{python}
+penguins['Body Mass (kg)'] = penguins['Body Mass (g)']/1000
+```
+
+## Sorting
+
+```{python}
+penguins_small = penguins[['Species','Island','Body Mass (g)']]
+penguins_small.sort_values('Body Mass (g)')
+# ascending = False for descending order
+# na_position = 'first' or 'last' (default is 'last')
+# can also provide a key which is a function of prototype Series -> Series
+# inplace = True doesn't return a new dataframe, sorts the given one in place
+```
+
+
+## Grouping
+
+Grouping is a powerful tool.  Let's first
+group our penguins by species.  The result is a "grouped" object which needs to pass through a summarize operation to
+be useful. 
+
+```{python}
+penguins_by_species = penguins.groupby('Species')
+penguins_by_species
+```
+
+## Summarizing
+
+```{python}
+# describe computes basic descriptive statistics
+penguins_by_species['Body Mass (g)'].describe()
+```
+
+```{python}
+# this fails because some columns aren't numeric
+penguins_by_species.mean(numeric_only=True)
+```
+
+
+```{python}
+penguins_by_species.count()
+```
+
+
+
+## MultiIndex
+
+```{python}
+penguins_by_sex_and_species = penguins.groupby(['Sex','Species'])
+penguins_by_sex_and_species['Body Mass (g)'].describe().round()
+```
+
+```{python}
+# pivot tables
+penguins_by_sex_and_species['Body Mass (g)'].mean().reset_index().pivot(index='Sex',columns='Species',values='Body Mass (g)')
+```
+
+## Pandas plotting
+
+Some simple plots are available directly from pandas.
+
+```{python}
+penguins[penguins['Species'].str.startswith("Adel")].groupby(['Sex'])['Body Mass (g)'].hist(bins=30,legend=True)
+```
+
+## Excel files
+
+We can read an excel file.  This particular one is complicated for various reasons, including the fact that the column heads are in the third row, not at the top. Also there are a bunch of footnotes starting in row 510 that we don't want. So we don't read them in. 
+
+```{python}
+crime2019 = pd.read_excel("data/Violent Crime-by state-2019-table-5.xls",header=3,nrows=510)
+crime2019
+```
+
+The column names have newlines in them and we'd like to get rid of those. 
+
+```{python}
+crime2019.columns = [x.replace(" \n","_") for x in crime2019.columns]
+crime2019
+```
+
+Let's look at the states. 
+
+```{python}
+states = crime2019["State"].dropna().values
+states
+```
+
+Some have footnotes at the end.  We don't want them.
+
+```{python}
+states = [re.sub("[0-9$]","",x) for x in states]
+states
+```
+]
+We don't want to include DC or Puerto Rico.
+
+```{python}
+states = [x for x in states if x!='DISTRICT OF COLUMBIA' and x!='PUERTO RICO']
+states
+```
+
+Finally, we want to pull out the violent crime numbers for
+the total area of the state. Notice
+that Puerto Rico and DC use "Total", not
+"State Total", for Area and so they will
+be excluded.
+
+```{python}
+vcrime2019 = crime2019[crime2019['Area'] == 'State Total']['Violent_crime1'].values
+vcrime2019
+```
