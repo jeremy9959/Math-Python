@@ -3,3 +3,4 @@ ferpa/
 .ipynb_checkpoints
 .virtual_documents
 __pycache__/
+__pycache__
