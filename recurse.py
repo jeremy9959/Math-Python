@@ -2,9 +2,9 @@ import inspect
 
 
 def pow(x, k, N):
-    # F = inspect.currentframe()
+    F = inspect.currentframe()
 
-    # print(f"Entering with x={x}, k={k}, N={N} from line {F.f_back.f_lineno}")
+    print(f"Entering with x={x}, k={k}, N={N} from line {F.f_back.f_lineno}")
     if k == 0:
         result = 1
     elif k % 2 == 0:
@@ -12,15 +12,16 @@ def pow(x, k, N):
     else:
         result = x * pow(x, k - 1, N) % N
 
-    # print(
-    #     f"Returning with x ={x}, k ={k}, N ={N}, returning {result} to line {F.f_back.f_lineno}"
-    # )
+    print(
+        f"Returning with x ={x}, k ={k}, N ={N}, returning {result} to line {F.f_back.f_lineno}"
+    )
     return result
 
 
 def mypow(x, k, N):
     stack = []
     while True:
+        print(stack)
         if k == 0:
             stack.append((1, x, 0, N))
             break
@@ -33,6 +34,7 @@ def mypow(x, k, N):
             stack.append((x, x, k - 1, N))
             k = k - 1
             continue
+
     answer = 1
     print(f"Stack has length {len(stack)}")
     while stack:
@@ -54,5 +56,5 @@ if __name__ == "__main__":
     #     print(base, "is a Fermat witness for", modulus)
     # else:
     #     print(base, "is not a Fermat witness for", modulus)
+    # print(mypow(base, modulus - 1, modulus))
     print(mypow(base, modulus - 1, modulus))
-    print(pow(base, modulus - 1, modulus))
