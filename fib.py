@@ -25,3 +25,6 @@ if __name__ == "__main__":
     n = input("Enter n: ")
     n = int(n)
     print(f"F{n} = {fib(n)}")
+
+
+# blows up

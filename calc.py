@@ -29,6 +29,3 @@ while True:
         continue
 
     print(stack.pop())
-
-
-# Path: stack.py
